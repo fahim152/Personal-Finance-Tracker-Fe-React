@@ -1,5 +1,5 @@
 class RequestHandler {
-    static baseUrl = 'http://localhost:8090/api'; // Adjust this URL to match your actual API endpoint
+    static baseUrl = 'http://localhost:8090/api';
   
     static async fetchEntries() {
       const response = await fetch(`${this.baseUrl}/finance-entry`);
@@ -22,13 +22,11 @@ class RequestHandler {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Include other headers as required by your backend, like authorization headers
         },
         body: JSON.stringify(entryData),
         });
 
         if (!response.ok) {
-        // Convert non-2xx HTTP responses into errors
         const errorData = await response.json();
         throw new Error(errorData.message || 'Error submitting entry');
         }

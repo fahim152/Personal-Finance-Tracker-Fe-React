@@ -17,12 +17,10 @@ function FinanceEntryForm({ onSubmit }) {
     e.preventDefault();
     try {
       const addedEntry = await RequestHandler.addEntry(entry);
-      // Safety check before calling onSubmit
       if (typeof onSubmit === 'function') {
         onSubmit(addedEntry);
       } else {
         console.error('onSubmit is not a function');
-        // Optionally, you could provide more feedback here, e.g., a fallback action
       }
       setEntry({ date: '', amount: '', category: '', description: '' });
       alert('Submitted Successfully');
