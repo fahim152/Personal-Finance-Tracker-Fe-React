@@ -1,7 +1,7 @@
 class RequestHandler {
     static baseUrl = 'http://localhost:8090/api';
   
-    static async fetchEntries() {
+    static async fetchEntries(filterList = []) {
       const response = await fetch(`${this.baseUrl}/finance-entry`);
       if (!response.ok) {
         throw new Error('Error fetching entries');

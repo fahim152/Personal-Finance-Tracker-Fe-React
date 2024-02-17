@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import RequestHandler from './RequestHandler';
+import {
+  TextField,
+  Button,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Grid
+} from '@mui/material';
 
 function FinanceEntryForm({ onSubmit }) {
   const [entry, setEntry] = useState({
@@ -30,40 +40,61 @@ function FinanceEntryForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="date"
-        name="date"
-        value={entry.date}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="number"
-        name="amount"
-        value={entry.amount}
-        onChange={handleChange}
-        required
-      />
-      <select
-        name="category"
-        value={entry.category}
-        onChange={handleChange}
-        required
-      >
-        <option value="">Select Category</option>
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select>
-      <input
-        type="text"
-        name="description"
-        value={entry.description}
-        placeholder="Description"
-        onChange={handleChange}
-      />
-      <button type="submit">Add Entry</button>
-    </form>
+    <Box sx={{ '& > :not(style)': { m: 1 } }} component="form" onSubmit={handleSubmit} noValidate autoComplete="off">
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextField
+            fullWidth
+            label="Date"
+            type="date"
+            name="date" 
+            value={entry.date}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            fullWidth
+            label="Amount"
+            type="number"
+            name="amount" 
+            value={entry.amount}
+            onChange={handleChange}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl fullWidth>
+            <InputLabel>Category</InputLabel>
+            <Select
+              name="category"
+              value={entry.category}
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value="income">Income</MenuItem>
+              <MenuItem value="expense">Expense</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            fullWidth
+            label="Description"
+            name="description" 
+            value={entry.description}
+            onChange={handleChange}
+            multiline
+            rows={2}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Button type="submit" variant="contained" fullWidth>Add Entry</Button>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
